@@ -1,0 +1,118 @@
+body{
+    margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    font-family: "work sans";
+    background: #FFFEF8;
+}
+
+
+h1{
+    display: flex;
+	flex-direction: column;
+	font-family: 'Syne';
+	font-size: 22px;
+	font-weight: 800;
+	color: #B1663C;
+    margin-left: 110px;
+    margin-top: 40px;
+
+    
+}
+ul {
+	list-style: none;
+}
+nav ul {
+	display: flex;
+	flex-direction: row;
+    justify-content: space-between;
+	list-style-type: none;
+    align-items: center;
+    margin-left: 1064px;
+    margin-top: -44px;
+    color:black;
+}
+nav li {
+	padding: 0 10px;
+	font-size: 1.2em;
+    
+}
+
+span{
+    font-weight: 400;
+    font-size: 10px;
+    font-family: "work sans";
+}
+a{
+    text-decoration: none;
+    color: black;
+    font-weight: 400;
+}
+a:hover{
+    color: black;
+    font-weight: 600;
+}
+h2{
+   display: flex;
+   justify-content: center;
+   margin-top: 130px;
+   font-family: "syne";
+   font-weight: 700;
+   font-size: 30px;
+   color: #1D6154;
+}
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#connexion{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.connexionForm{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+#email {
+    width: 350px;
+    height: 50px;
+    border: solid 1px white;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+#password {
+    width: 350px;
+    height: 50px;
+    border: solid 1px white;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+label{
+    margin-bottom: 10px;
+}
+.submitBtn{
+    background-color: #1D6154;
+    color: white;
+    border: solid 1px #1D6154;
+    border-radius: 20px;
+    padding:10px;
+    width: 200px;
+    font-family: "work sans";
+    font-weight: 700;
+    font-size: 14px;
+    margin: 30px;
+}
+#forgot_password{
+    text-decoration-line: underline;
+    margin-top: 10px;
+}
+#mentions{
+    margin-top:500px;
+    margin-left: 180px;
+}
