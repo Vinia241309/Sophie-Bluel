@@ -29,4 +29,29 @@ displayGallery()
   .catch(error => console.error(error));
 
   
+  const createButton = (button) => {
+    const filtErs = document.querySelector(".filters");
+    
+    
+  
+    filtErs.insertAdjacentHTML(
+        "beforeend",
+        `<button data-tag="${button.name}"> ${button.name} </button>`,
+        
+    );
  
+};
+
+
+  fetch("http://localhost:5678/api/categories")
+  
+      .then((response)=>response.json())
+      .then((infos) => {
+          infos.forEach((button) => {
+              createButton(button);
+              
+          });
+      })
+      
+    
+
