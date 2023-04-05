@@ -56,13 +56,17 @@ const showModalGallery = (works) => {
   
   const deleteWorks = document.querySelectorAll(".delete-work")
   deleteWorks.forEach((deleteWork) => {
-    deleteWork.addEventListener("click", () => {
+    deleteWork.addEventListener("click", (e) => {
+      
       const id = deleteWork.dataset.id;
+      
       fetch(`http://localhost:5678/api/works/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${localStorage["token"]}`,
         }
+        
+        
       })
         .then(response => {
           if (response.ok) {
@@ -82,11 +86,17 @@ const showModalGallery = (works) => {
         .catch(error => {
           console.error('There was a problem with the fetch operation:', error);
         });
+        
     });
   });  
   
 }
 
+const reTurn = document.getElementById("return")
+reTurn.addEventListener("click", ()=>{
+    modal.style.display="block"
+    addWorks.style.display="none"
+})
 
 const btnAddWork = document.querySelector(".btn-addwork")
 const addWorks = document.querySelector(".modal-addwork")
@@ -109,7 +119,7 @@ closed.addEventListener('click', () => {
       }
   });
 
-  
+ 
   async function submitWork(event) {
     console.log("test");
   
@@ -146,7 +156,15 @@ closed.addEventListener('click', () => {
       return;
     }
   }
+  const submitForm = document.getElementById("addPhotoForm");
+  submitForm.addEventListener("submit",(e) => {
+    
+    submitWork(e)
+    
   
+  }
+  
+  );
   const btnAddPhoto = document.getElementById("btnAddPhoto");
   const fileInput = document.getElementById("fileInput");
   
@@ -156,14 +174,7 @@ closed.addEventListener('click', () => {
   
   
 
-const submitForm = document.getElementById("addPhotoForm");
-submitForm.addEventListener("submit",(e) => {
-  e.preventDefault();
-  submitWork(e)
 
-}
-
-);
 console.log(submitForm)
 
 btnAddPhoto.addEventListener("click", () => {
@@ -175,14 +186,14 @@ function changeButtonColor() {
     const category = document.getElementById("PhotoCategory").value;
     const image = document.getElementById("fileInput").files[0];
     const button = document.getElementById("valider");
-  
+
     if (title !== "" && category !== "" && image !== "") {
       button.style.backgroundColor = "#1D6154";
     } else {
       button.style.backgroundColor = "";
     }
   }
-  
+
   document.getElementById("PhotoTitle").addEventListener("change", changeButtonColor);
   document.getElementById("PhotoCategory").addEventListener("change", changeButtonColor);
   document.getElementById("fileInput").addEventListener("change", changeButtonColor);
@@ -301,12 +312,13 @@ const userConnectedPage = () => {
       const icon = document.createElement('i');
       icon.className = 'fa-regular fa-pen-to-square';
       projectsTitle.appendChild(icon);
-      
       modify.textContent = 'modifier';
       projectsTitle.appendChild(modify);
     };
 
     addBtn();
+    
+   const intro = document.getElementById("introduction")
   
     const loginButton = document.getElementById("loginbtn");
     const logoutButton = document.createElement("a");
@@ -324,4 +336,3 @@ if (token) {
 
 
 
- 

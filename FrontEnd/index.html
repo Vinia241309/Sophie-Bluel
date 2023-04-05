@@ -7,8 +7,11 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="fontawesome-free-6.2.1-desktop/">
 	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="fontawesome-free-6.2.1-desktop/">
+  <script src="https://kit.fontawesome.com/f8861ba3cb.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
@@ -17,7 +20,7 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li class="log" href="Login/log.html">login</li>
+			<li><a href="Login/log.html" class="log" id="loginbtn">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -25,7 +28,7 @@
 <main>
 	<section id="introduction">
 		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
+			<img src="./assets/images/sophie-bluel.png" alt="images portfolio">
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -35,8 +38,12 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+	
 
+		<h2 id="projects">Mes Projets</h2>
+
+		
+	
 		<div class="filters">
 			<button class="all">Tous</button>
 		</div>
@@ -67,6 +74,57 @@
 		</ul>
 	</nav>
 </footer>
+<div class="modal">
+	<div class="galerie-photos">`
+
+		<i class="fa-solid fa-xmark" id="close"></i>
+	<h2 id="gallery-title">Galerie photos</h2>
+	<div class="list-works">
+		
+    </div>
+	<hr>
+	<input class="btn-addwork" type="submit" value="Ajouter une photo">
+	<p class="delete-gallery">Supprimer la galerie</p>
+	</div>
+	
+	
+</div>
+<div class="modal-addwork">
+	<div class="modal-form">
+		<i class="fa-solid fa-arrow-left" id="return"></i>
+		<i class="fa-solid fa-xmark" id="closed"></i>
+		
+		<form method="post" id="addPhotoForm">
+			<div id="PhotoContainer">
+				<label class="PhotoContent" for="btnAddPhoto">
+					<i class="fa-regular fa-image photoIcon" id="img-icon"></i>
+				</label>
+				<label id="data-photos" class="PhotoContent">
+				
+				  <input type="file" id="fileInput">
+				  <input type="button" id="btnAddPhoto" value="+ Ajouter photo">
+
+				</label>
+				<label class="PhotoContent" id="data-photo">jpg.png: 4mo max</label>
+				<img id="photo" alt="votre photo" src="#" />
+			</div>
+			<label class="label-title">Titre</label>
+			<input type="text" name="Title" id="PhotoTitle" required />
+			<label class="label-category">Catégorie</label>
+			<select id="PhotoCategory">
+				
+				
+			</select>
+			<hr>
+			<button type="submit" id="valider">Valider</button>
+		</form>
+		
+		
+		
+		<p class="delete-gallery">Supprimer la galerie</p>
+    </div>
+</div>
+
 <script src="main.js"></script>
 </body>
 </html>
