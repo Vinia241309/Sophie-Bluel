@@ -110,15 +110,15 @@ closed.addEventListener('click', () => {
   });
 
   
-  async function submitWork (event) {
-    console.log("test")
-    
+  async function submitWork(event) {
+    console.log("test");
+  
     const title = document.getElementById("PhotoTitle").value;
     const category = document.getElementById("PhotoCategory").value;
-    const image = document.getElementById("btnAddPhoto").files[0];
-
+    const image = document.getElementById("fileInput").files[0];
+  
     const formData = new FormData(addPhotoForm);
-    
+  
     formData.append("image", image);
     formData.append("title", title);
     formData.append("category", category);
@@ -131,24 +131,29 @@ closed.addEventListener('click', () => {
     try {
       const response = await fetch("http://localhost:5678/api/works", {
         method: "POST",
-        Accept : 'application/json',
+        Accept: "application/json",
         body: formData,
         headers: {
-         
           Authorization: `Bearer ${localStorage["token"]}`,
-        }
+        },
       });
-  
-      
     } catch (error) {
       console.error(error);
     }
-    
-    if(!title || !category || !image) {
-      alert('Invalide! Merci de remplir tous les champs')
+  
+    if (!title || !category || !image) {
+      alert("Invalide! Merci de remplir tous les champs");
       return;
     }
   }
+  
+  const btnAddPhoto = document.getElementById("btnAddPhoto");
+  const fileInput = document.getElementById("fileInput");
+  
+  btnAddPhoto.addEventListener("click", () => {
+    fileInput.click();
+  });
+  
   
 
 const submitForm = document.getElementById("addPhotoForm");
@@ -161,7 +166,27 @@ submitForm.addEventListener("submit",(e) => {
 );
 console.log(submitForm)
 
+btnAddPhoto.addEventListener("click", () => {
+  fileInput.click();
+})
 
+function changeButtonColor() {
+    const title = document.getElementById("PhotoTitle").value;
+    const category = document.getElementById("PhotoCategory").value;
+    const image = document.getElementById("fileInput").files[0];
+    const button = document.getElementById("valider");
+  
+    if (title !== "" && category !== "" && image !== "") {
+      button.style.backgroundColor = "#1D6154";
+    } else {
+      button.style.backgroundColor = "";
+    }
+  }
+  
+  document.getElementById("PhotoTitle").addEventListener("change", changeButtonColor);
+  document.getElementById("PhotoCategory").addEventListener("change", changeButtonColor);
+  document.getElementById("fileInput").addEventListener("change", changeButtonColor);
+  
 const addImg = document.getElementById("data-photos");
 addImg.addEventListener("change", checkData);
 
