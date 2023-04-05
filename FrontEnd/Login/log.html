@@ -8,45 +8,46 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
-	<link rel="stylesheet" href="./log.css">
-    <script src="Javascript/log.js" defer></script>
+	<link rel="stylesheet" href="/Sophie-Bluel/FrontEnd/Login/log.css">
+    
 </head>
 <body>
     <header>
         <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
         <nav>
             <ul>
-                <li><a href="index.html">projets</a></li>
-                <li><a href="index.html#contact">contact</a></li>
-                <li><a href="login.html">login</a></li>
+                <li><a href="">projets</a></li>
+                <li><a href="">contact</a></li>
+                <li><a href="">login</a></li>
                 <li><img src="/FrontEnd/assets/icons/instagram.png" alt="Instagram"></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section id="connexion">
+        <section class="connection">
             <h2>Login</h2>
-            <form class="loginForm" action="#" method="#">
-                <div class="connexionForm">
+            <form class="log_form" action="#" method="post">
+                <div class="connect_form">
                     <label for="email">E-mail</label>
-                    <input type="email" name="email" id="email" required>
+                    <input class="email" type="email" name="email">
                 </div>
-                <div class="connexionForm">
+                <div class="connect_form">
                     <label for="password">Mot de passe</label>
-                    <input type="password" name="password" id="password" required>
+                    <input class="password" type="password" name="password">
                 </div>
-                <input class="submitBtn" type="submit" id="submitUserInfo" value="Se connecter">
-                <a id="forgot_password"href="#">Mot de passe oublié</a>
+                <input class="btn_submit" type="submit" value="Se connecter">
+                <a class="password_forgotten"href="#">Mot de passe oublié</a>
             </form>
 
         </section>
     </main>
 
     <footer>
+        <script src="log.js"></script>
         <nav>
             <ul>
-                <li id="mentions" href="#">Mentions Légales</li>
+                <li class="mentions" href="#">Mentions Légales</li>
             </ul>
         </nav>
     </footer>

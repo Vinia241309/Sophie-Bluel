@@ -14,10 +14,10 @@ h1{
     display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
-	font-size: 22px;
+	font-size: 30px;
 	font-weight: 800;
 	color: #B1663C;
-    margin-left: 110px;
+    margin-left: 150px;
     margin-top: 40px;
 
     
@@ -31,19 +31,21 @@ nav ul {
     justify-content: space-between;
 	list-style-type: none;
     align-items: center;
-    margin-left: 1064px;
+    margin-left: 1300px;
+    margin-right: 40px;
     margin-top: -44px;
     color:black;
 }
 nav li {
-	padding: 0 10px;
+	
 	font-size: 1.2em;
+    margin: 20px;
     
 }
 
 span{
     font-weight: 400;
-    font-size: 10px;
+    font-size: 20px;
     font-family: "work sans";
 }
 a{
@@ -64,30 +66,30 @@ h2{
    font-size: 30px;
    color: #1D6154;
 }
-.loginForm{
+.log_form{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-#connexion{
+.connion{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.connexionForm{
+.connect_form{
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
 }
-#email {
+.email {
     width: 350px;
     height: 50px;
     border: solid 1px white;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 }
-#password {
+.password {
     width: 350px;
     height: 50px;
     border: solid 1px white;
@@ -96,7 +98,7 @@ h2{
 label{
     margin-bottom: 10px;
 }
-.submitBtn{
+.btn_submit{
     background-color: #1D6154;
     color: white;
     border: solid 1px #1D6154;
@@ -107,12 +109,14 @@ label{
     font-weight: 700;
     font-size: 14px;
     margin: 30px;
+    cursor: pointer;
 }
-#forgot_password{
+.password_forgotten{
     text-decoration-line: underline;
     margin-top: 10px;
 }
-#mentions{
-    margin-top:500px;
+.mentions{
+    margin-top:300px;
     margin-left: 180px;
+    cursor: pointer;
 }
