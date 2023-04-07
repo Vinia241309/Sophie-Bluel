@@ -297,17 +297,6 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
-}
-
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
@@ -342,10 +331,17 @@ footer nav ul {
     right:15px
 }
 .btn-addwork{
-    display: flex;
+    display: block;
     cursor: pointer;
     width: 237px;
     height: 36px;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	text-align: center;
+	border-radius: 60px ;
 }
 .delete-gallery{
     display: flex;
@@ -396,12 +392,16 @@ footer nav ul {
 }
 #valider{
     background-color: #a7a7a7;
+	border: #a7a7a7;
     border-radius: 20px;
     width: 237px;
     height: 36px;
     margin-top: 60px;
     margin-bottom: 53px;
     cursor: pointer;
+	color: #fff;
+	font-family: 'Syne';
+	font-weight: 700;
 }
 #btnAddPhoto{
     border-radius: 20px;
@@ -414,20 +414,36 @@ footer nav ul {
 #img-icon{
     color: #a7a7a7;
     display: block;
-    width: 58px;
-    height: 46px;
+	font-size: xxx-large;
 }
 .label-title{
-    position: absolute;
-    left:150px;
-    bottom:450px;
+    position: relative;
+    right: 198px;
+	bottom: -21px;
 }
 .label-category{
-    position: absolute;
-    left:150px;
-    bottom:356px;
+    position: relative;
+    right: 179px;
+	bottom:-23px
 }
 #return{
     
     cursor: pointer;
 }
+
+#PhotoContainer {
+	text-align: center;
+	
+  }
+  
+  #PhotoContainer img {
+	display: flex;
+	max-height: 100%;
+	width: auto;
+	justify-content: center;
+  }
+
+  img::before{
+	display: none;
+  }
+  
