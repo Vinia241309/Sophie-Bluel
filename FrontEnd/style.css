@@ -17,6 +17,8 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	background: #FFFEF8;
+
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -288,6 +290,15 @@ margin: auto;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	
+}
+#send{
+	border-radius: 50px;
+	background-color: #1D6154;
+	width: 179px;
+	height: 36px;
+	color: #fff;
+	margin: auto;
 }
 #contact label {
 	margin: 2em 0 1em 0;
@@ -295,6 +306,7 @@ margin: auto;
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	margin-bottom: 40px;
 }
 
 footer nav ul {
@@ -403,14 +415,14 @@ footer nav ul {
 	font-family: 'Syne';
 	font-weight: 700;
 }
-#btnAddPhoto{
+/*#btnAddPhoto{
     border-radius: 20px;
     width: 173px;
     height: 36px;
     background-color: #cbd6dc;
     border: #cbd6dc;
     cursor: pointer;
-}
+}*/
 #img-icon{
     color: #a7a7a7;
     display: block;

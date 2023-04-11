@@ -24,6 +24,10 @@ async function displayGallery(){
         gallery.appendChild(figure)
         figure.appendChild(figureImg)
         figure.appendChild(figCaption)
+
+
+
+        
         
     });
     showModalGallery(works)
@@ -126,7 +130,7 @@ closed.addEventListener('click', () => {
   
     const title = document.getElementById("PhotoTitle").value;
     const category = document.getElementById("PhotoCategory").value;
-    const image = document.getElementById("fileInput").files[0];
+    const image = document.getElementById("btnAddPhoto").files[0];
   
     const formData = new FormData(addPhotoForm);
   
@@ -161,7 +165,7 @@ closed.addEventListener('click', () => {
 submitForm.addEventListener("submit", submitWork);
   
 
-  const inputImage = document.getElementById("fileInput");
+  const inputImage = document.getElementById("btnAddPhoto");
   const labelImage = document.getElementById("data-photos");
   const photoForm = document.getElementById("PhotoContainer");
   const photoFormMessage = document.getElementById("data-photo");
@@ -169,44 +173,46 @@ submitForm.addEventListener("submit", submitWork);
   const previewImage = photoForm.querySelector("img");
 
   function displaySelectedImage(inputElement, previewElement, labelElement, messageElement, iconElement) {
-    inputElement.addEventListener("change", function () {
-      const selectedImage = inputElement.files.item(0);
-      const imgPreview = document.createElement("img");
-      imgPreview.src = URL.createObjectURL(selectedImage);
-      imgPreview.style.maxHeight = "100%";
-      imgPreview.style.width = "auto";
+    labelElement.addEventListener("click", () => {
+      inputElement.click();
+      inputElement.style.display = 'none'
+    })
+    inputElement.addEventListener("change", function(event){
+      event.preventDefault();
+      const selectedImage = inputElement.files[0];
+      previewElement.src = URL.createObjectURL(selectedImage);
+      previewElement.style.maxHeight = "100%";
+      previewElement.style.width = "auto";
   
       labelElement.style.display = "none";
       messageElement.style.display = "none";
       inputElement.style.display = "none";
       iconElement.style.display = "none";
-      previewElement.appendChild(imgPreview);
-    });
+      
+    })
+      
   }
+      
+      
+  
   displaySelectedImage(inputImage, previewImage, labelImage, photoFormMessage, modalImageIcon);
   
  
-  const btnAddPhoto = document.getElementById("btnAddPhoto");
-  const fileInput = document.getElementById("fileInput");
+ 
   
-  btnAddPhoto.addEventListener("click", (e) => {
+ /* btnAddPhoto.addEventListener("click", (e) => {
     e.preventDefault()
-    fileInput.click();
-  });
+  btnAddPhoto.click();
+  // });*/
   
   
 
 
-console.log(submitForm)
-
-btnAddPhoto.addEventListener("click", () => {
-  fileInput.click();
-})
 
 function changeButtonColor() {
     const title = document.getElementById("PhotoTitle").value;
     const category = document.getElementById("PhotoCategory").value;
-    const image = document.getElementById("fileInput").files[0];
+    const image = document.getElementById("btnAddPhoto").files[0];
     const button = document.getElementById("valider");
 
     if (title !== "" && category !== "" && image !== "") {
@@ -218,7 +224,7 @@ function changeButtonColor() {
 
   document.getElementById("PhotoTitle").addEventListener("change", changeButtonColor);
   document.getElementById("PhotoCategory").addEventListener("change", changeButtonColor);
-  document.getElementById("fileInput").addEventListener("change", changeButtonColor);
+  document.getElementById("btnAddPhoto").addEventListener("change", changeButtonColor);
   
 const addImg = document.getElementById("data-photos");
 addImg.addEventListener("change", checkData);
