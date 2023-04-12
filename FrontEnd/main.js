@@ -30,6 +30,9 @@ async function displayGallery(){
         
         
     });
+
+
+    
     showModalGallery(works)
 
 }
@@ -101,7 +104,9 @@ reTurn.addEventListener("click", ()=>{
     modal.style.display="block"
     addWorks.style.display="none"
 })
-
+document.getElementById("btnChoosePhoto").addEventListener("click", function() {
+  document.getElementById("btnAddPhoto").click();
+});
 const btnAddWork = document.querySelector(".btn-addwork")
 const addWorks = document.querySelector(".modal-addwork")
 const closed = document.querySelector("#closed")
@@ -171,7 +176,7 @@ submitForm.addEventListener("submit", submitWork);
   const photoFormMessage = document.getElementById("data-photo");
   const modalImageIcon = document.getElementById("img-icon");
   const previewImage = photoForm.querySelector("img");
-
+  const btnAddImg = document.getElementById("btnChoosePhoto");
   function displaySelectedImage(inputElement, previewElement, labelElement, messageElement, iconElement) {
     labelElement.addEventListener("click", () => {
       inputElement.click();
@@ -188,6 +193,7 @@ submitForm.addEventListener("submit", submitWork);
       messageElement.style.display = "none";
       inputElement.style.display = "none";
       iconElement.style.display = "none";
+      btnAddImg.style.display="none";
       
     })
       

@@ -427,6 +427,7 @@ footer nav ul {
     color: #a7a7a7;
     display: block;
 	font-size: xxx-large;
+	background-color: #e8f1f7;
 }
 .label-title{
     position: relative;
@@ -457,5 +458,18 @@ footer nav ul {
 
   img::before{
 	display: none;
+  }
+  #btnAddPhoto{
+	display: none;
+  }
+  #btnChoosePhoto{
+	width: 173px;
+	height: 36px;
+	background-color: #cbd6dc;
+	border-radius: 30px;
+	border: #cbd6dc;
+  }
+  .PhotoContent{
+	background-color: #e8f1f7;
   }
   
