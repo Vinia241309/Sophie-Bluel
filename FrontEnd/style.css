@@ -239,7 +239,8 @@ hr{
     background: rgba(0, 0, 0, 0.5);
 }
 .modal-form{
- width: 45%;
+ width: 630px;
+ height: 637px;
  background-color: #fff;
  border-radius: 10px ;
  margin: 10% auto;
@@ -247,7 +248,8 @@ hr{
  padding: 32px 30px 48px 30px;
 }
 .galerie-photos{
- width: 45%;
+ width: 630px;
+ height: 570px;
  background-color: #fff;
  border-radius: 10px ;
  margin: 15% auto;
@@ -415,14 +417,7 @@ footer nav ul {
 	font-family: 'Syne';
 	font-weight: 700;
 }
-/*#btnAddPhoto{
-    border-radius: 20px;
-    width: 173px;
-    height: 36px;
-    background-color: #cbd6dc;
-    border: #cbd6dc;
-    cursor: pointer;
-}*/
+
 #img-icon{
     color: #a7a7a7;
     display: block;
@@ -472,4 +467,49 @@ footer nav ul {
   .PhotoContent{
 	background-color: #e8f1f7;
   }
-  
+  .black-band{
+	background-color: #000;
+  }
+  .head{
+	background-color: #000;
+	width: 1440px;
+	height: 58px;
+	margin-left: -120px;
+	display: none;
+  }
+  #modify-icon{
+	color: white;
+	background-color: #000;
+	margin: auto;
+
+  }
+  #edition{
+background-color: #000;
+color: #fff;
+display: flex;
+align-items: center;
+margin: 15px;
+  }
+  #black-head{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+margin: auto;
+background: #000;
+  }
+  #change-btn{
+	border-radius: 30px;
+	border: #000;
+	width: 216px;
+	height: 38px;
+	font-family: "Work sans";
+	font-weight: 800;
+  }
+#btn-modify-img{
+	margin-left: 59px;
+	margin-top: 20px;
+}
+.modify-btn{
+	display: none;
+}

@@ -23,16 +23,11 @@ async function displayGallery(){
         figCaption.innerHTML = work.title
         gallery.appendChild(figure)
         figure.appendChild(figureImg)
-        figure.appendChild(figCaption)
-
-
-
+        figure.appendChild(figCaption)  
         
         
     });
 
-
-    
     showModalGallery(works)
 
 }
@@ -41,6 +36,8 @@ const showModalGallery = (works) => {
   const close = document.querySelector("#close")
   
   const listWorks = document.querySelector(".list-works")
+  listWorks.innerHTML = "";
+  
   modify.addEventListener("click", () => {
   modal.style.display="block"
   });
@@ -58,8 +55,12 @@ const showModalGallery = (works) => {
     listWorks.innerHTML += `<div class="modal-work"><img src=${work.imageUrl}>
     <span class="delete-work" data-id=${work.id}><i class="fa-solid fa-trash-can">
     </i></i></span><span>éditer</span></div>`
-  })
+    listWorks.textContent = ""; // Clear the contents of the listWorks element
 
+  })
+  works.forEach((work) => {
+    addWorkToModal(work);
+  });
   
   const deleteWorks = document.querySelectorAll(".delete-work")
   deleteWorks.forEach((deleteWork) => {
@@ -127,8 +128,19 @@ closed.addEventListener('click', () => {
           modalAddwork.style.display="none"
       }
   });
-
- 
+  /*const addWorkToGallery = (work) => {
+    const figure = document.createElement("figure");
+    figure.setAttribute("data-name", work.category.name);
+    figure.setAttribute("data-id", work.id);
+    const figureImg = document.createElement("img");
+    figureImg.src = work.imageUrl;
+    const figCaption = document.createElement("figcaption");
+    figCaption.innerHTML = work.title;
+    gallery.appendChild(figure);
+    figure.appendChild(figureImg);
+    figure.appendChild(figCaption);
+  };*/
+  
   async function submitWork(event) {
     event.preventDefault()
     console.log("test");
@@ -169,6 +181,54 @@ closed.addEventListener('click', () => {
   const submitForm = document.getElementById("addPhotoForm");
 submitForm.addEventListener("submit", submitWork);
   
+const addWorkToModal = (work) => {
+  const listWorks = document.querySelector(".list-works");
+  
+  const modalWork = document.createElement("div");
+  modalWork.className = "modal-work";
+  
+  const img = document.createElement("img");
+  img.src = work.imageUrl;
+  
+  const deleteBtn = document.createElement("span");
+  deleteBtn.className = "delete-work";
+  deleteBtn.dataset.id = work.id;
+  
+  const deleteIcon = document.createElement("i");
+  deleteIcon.className = "fa-solid fa-trash-can";
+  
+  const editSpan = document.createElement("span");
+  editSpan.innerHTML = "éditer";
+  
+  modalWork.appendChild(img);
+  modalWork.appendChild(deleteBtn);
+  deleteBtn.appendChild(deleteIcon);
+  modalWork.appendChild(editSpan);
+  
+  listWorks.appendChild(modalWork);
+ 
+  deleteBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const id = deleteBtn.dataset.id;
+    fetch(`http://localhost:5678/api/works/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage["token"]}`,
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log("L'image a bien été supprimée");
+        modalWork.remove();
+      }
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+  });
+};
+
+
 
   const inputImage = document.getElementById("btnAddPhoto");
   const labelImage = document.getElementById("data-photos");
@@ -202,15 +262,6 @@ submitForm.addEventListener("submit", submitWork);
       
   
   displaySelectedImage(inputImage, previewImage, labelImage, photoFormMessage, modalImageIcon);
-  
- 
- 
-  
- /* btnAddPhoto.addEventListener("click", (e) => {
-    e.preventDefault()
-  btnAddPhoto.click();
-  // });*/
-  
   
 
 
@@ -337,6 +388,10 @@ const userConnectedPage = () => {
       projectsTitle.appendChild(icon);
       modify.textContent = 'modifier';
       projectsTitle.appendChild(modify);
+      const blackHead = document.querySelector(".head");
+      blackHead.style.display = "flex";
+      const btnModify = document.querySelector(".modify-btn")
+      btnModify.style.display = "block"
     };
 
     addBtn();
