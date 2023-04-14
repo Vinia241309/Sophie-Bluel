@@ -112,24 +112,21 @@
 		
 		<form method="post" id="addPhotoForm">
 			<div id="PhotoContainer">
-				
-					<i class="fa-sharp fa-regular fa-image" id="img-icon"></i>
-				
-				<label id="data-photos" class="PhotoContent"></label>
-				  <input type="file" id="btnAddPhoto"><button type="button" id="btnChoosePhoto">+ Ajouter photo</button>
-				<label class="PhotoContent" id="data-photo">jpg.png: 4mo max</label>
-				<img src="#"  alt="votre photo" id="yourPhoto"/>
+			  <i class="fa-sharp fa-regular fa-image" id="img-icon"></i>
+			  <label id="data-photos" class="PhotoContent"></label>
+			  <input type="file" id="btnAddPhoto">
+			  <button type="button" id="btnChoosePhoto">+ Ajouter photo</button>
+			  <label class="PhotoContent" id="data-photo">jpg.png: 4mo max</label>
+			  <img src="#" alt="votre photo" id="yourPhoto" />
 			</div>
 			<label class="label-title">Titre</label>
 			<input type="text" name="Title" id="PhotoTitle" required />
 			<label class="label-category">Catégorie</label>
-			<select id="PhotoCategory">
-				
-				
-			</select>
+			<select id="PhotoCategory"></select>
 			<hr>
 			<button type="submit" id="valider">Valider</button>
-		</form>
+		  </form>
+		  
 	
 		<p class="delete-gallery">Supprimer la galerie</p>
     </div>

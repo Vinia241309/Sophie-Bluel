@@ -10,27 +10,24 @@ async function getworks(){
 }
 
 async function displayGallery(){
-    const works = await getworks();
-   
+  const works = await getworks();
+ 
+  works.forEach(work=> {
+    const figure = document.createElement("figure")
+    figure.setAttribute("data-name", work.category.name);
+    figure.setAttribute("data-id", work.id);
+    const figureImg = document.createElement("img")
+    figureImg.src = work.imageUrl
+    const figCaption = document.createElement("figcaption")
+    figCaption.innerHTML = work.title
+    gallery.appendChild(figure)
+    figure.appendChild(figureImg)
+    figure.appendChild(figCaption)    
+});
 
-    works.forEach(work=> {
-        const figure = document.createElement("figure")
-        figure.setAttribute("data-name", work.category.name);
-        figure.setAttribute("data-id", work.id);
-        const figureImg = document.createElement("img")
-        figureImg.src = work.imageUrl
-        const figCaption = document.createElement("figcaption")
-        figCaption.innerHTML = work.title
-        gallery.appendChild(figure)
-        figure.appendChild(figureImg)
-        figure.appendChild(figCaption)  
-        
-        
-    });
-
-    showModalGallery(works)
-
+  showModalGallery(works);
 }
+
 
 const showModalGallery = (works) => {
   const close = document.querySelector("#close")
@@ -55,7 +52,7 @@ const showModalGallery = (works) => {
     listWorks.innerHTML += `<div class="modal-work"><img src=${work.imageUrl}>
     <span class="delete-work" data-id=${work.id}><i class="fa-solid fa-trash-can">
     </i></i></span><span>éditer</span></div>`
-    listWorks.textContent = ""; // Clear the contents of the listWorks element
+    listWorks.textContent = ""; 
 
   })
   works.forEach((work) => {
@@ -92,7 +89,7 @@ const showModalGallery = (works) => {
       
         })
         .catch(error => {
-          console.error('There was a problem with the fetch operation:', error);
+          console.error(error);
         });
         
     });
@@ -100,6 +97,7 @@ const showModalGallery = (works) => {
   
 }
 
+  
 const reTurn = document.getElementById("return")
 reTurn.addEventListener("click", ()=>{
     modal.style.display="block"
@@ -128,59 +126,76 @@ closed.addEventListener('click', () => {
           modalAddwork.style.display="none"
       }
   });
-  /*const addWorkToGallery = (work) => {
-    const figure = document.createElement("figure");
-    figure.setAttribute("data-name", work.category.name);
-    figure.setAttribute("data-id", work.id);
-    const figureImg = document.createElement("img");
-    figureImg.src = work.imageUrl;
-    const figCaption = document.createElement("figcaption");
-    figCaption.innerHTML = work.title;
-    gallery.appendChild(figure);
-    figure.appendChild(figureImg);
-    figure.appendChild(figCaption);
-  };*/
-  
-  async function submitWork(event) {
-    event.preventDefault()
-    console.log("test");
-  
-    const title = document.getElementById("PhotoTitle").value;
-    const category = document.getElementById("PhotoCategory").value;
-    const image = document.getElementById("btnAddPhoto").files[0];
-  
-    const formData = new FormData(addPhotoForm);
-  
-    formData.append("image", image);
-    formData.append("title", title);
-    formData.append("category", category);
-  
-    if (image.size > 4 * 1024 * 1024) {
-      alert("L'image est trop grande");
-      return;
-    }
-  
-    try {
-      const response = await fetch("http://localhost:5678/api/works", {
-        method: "POST",
-        Accept: "application/json",
-        body: formData,
-        headers: {
-          Authorization: `Bearer ${localStorage["token"]}`,
-        },
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  
-    if (!title || !category || !image) {
-      alert("Invalide! Merci de remplir tous les champs");
-      return;
+  async function addWorkToGallery(work) {
+    
+    if (work) {
+      const figure = document.createElement("figure");
+      figure.setAttribute("data-name", work.category ? work.category.name : "");
+      figure.setAttribute("data-id", work.id);
+      const figureImg = document.createElement("img");
+      figureImg.src = work.imageUrl;
+      const figCaption = document.createElement("figcaption");
+      figCaption.innerHTML = work.title;
+      gallery.appendChild(figure);
+      figure.appendChild(figureImg);
+      figure.appendChild(figCaption);
     }
   }
-  const submitForm = document.getElementById("addPhotoForm");
-submitForm.addEventListener("submit", submitWork);
   
+
+  const submitForm = document.getElementById("addPhotoForm");
+  submitForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+  
+      const title = document.getElementById("PhotoTitle").value;
+      const category = document.getElementById("PhotoCategory").value;
+      const image = document.getElementById("btnAddPhoto").files[0];
+  
+      // Check for empty fields
+      if (!title || !category || !image) {
+          alert("Invalid! Please fill in all the fields");
+          return;
+      }
+  
+      const formData = new FormData(addPhotoForm);
+  
+      formData.append("image", image);
+      formData.append("title", title);
+      formData.append("category", category);
+  
+      if (image.size > 4 * 1024 * 1024) {
+          alert("L'image est trop grande");
+          return;
+      }
+  
+      try {
+          const response = await fetch("http://localhost:5678/api/works", {
+              method: "POST",
+              Accept: "application/json",
+              body: formData,
+              headers: {
+                  Authorization: `Bearer ${localStorage["token"]}`,
+              },
+          });
+  
+          if (response.ok) {
+              const newWork = await response.json();
+              addWorkToGallery(newWork); 
+              addWorkToModal(newWork); 
+              document.getElementById("PhotoTitle").value = "";
+              document.getElementById("PhotoCategory").value = "";
+              document.getElementById("btnAddPhoto").value = "";
+              document.getElementById("yourPhoto").src = "";
+              alert("l'image a bien été ajoutée")
+              
+          }
+      } catch (error) {
+          console.error(error);
+      }
+  });
+  
+
+
 const addWorkToModal = (work) => {
   const listWorks = document.querySelector(".list-works");
   
@@ -223,7 +238,7 @@ const addWorkToModal = (work) => {
       }
     })
     .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
+      console.error('Erreur', error);
     });
   });
 };
@@ -411,6 +426,7 @@ const token = localStorage.getItem("token");
 if (token) {
     userConnectedPage();
 }
+
 
 
 

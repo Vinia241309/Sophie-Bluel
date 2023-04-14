@@ -53,7 +53,7 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 90px 0
 }
 section {
 	margin: 50px 0
@@ -249,7 +249,7 @@ hr{
 }
 .galerie-photos{
  width: 630px;
- height: 570px;
+ height: 615px;
  background-color: #fff;
  border-radius: 10px ;
  margin: 15% auto;
@@ -472,10 +472,14 @@ footer nav ul {
   }
   .head{
 	background-color: #000;
-	width: 1440px;
-	height: 58px;
-	margin-left: -120px;
+	width: 100%;
+	position: absolute;
+		left: 0;
+		right: 0;
+		top:0px;
+		margin-bottom: 40px;
 	display: none;
+
   }
   #modify-icon{
 	color: white;
