@@ -2,13 +2,15 @@ const gallery = document.querySelector(".gallery")
 const modify = document.createElement('span');
 const modal = document.querySelector(".modal")
 
+
+// function to show works //
 async function getworks(){
     const response = await fetch('http://localhost:5678/api/works')
     const infos = await response.json();
 
     return infos;
 }
-
+// function to create works //
 async function displayGallery(){
   const works = await getworks();
  
@@ -28,7 +30,7 @@ async function displayGallery(){
   showModalGallery(works);
 }
 
-
+// modal gallery //
 const showModalGallery = (works) => {
   const close = document.querySelector("#close")
   
@@ -59,6 +61,7 @@ const showModalGallery = (works) => {
     addWorkToModal(work);
   });
   
+  // delete works in modal //
   const deleteWorks = document.querySelectorAll(".delete-work")
   deleteWorks.forEach((deleteWork) => {
     deleteWork.addEventListener("click", (e) => {
@@ -97,7 +100,7 @@ const showModalGallery = (works) => {
   
 }
 
-  
+// return to modal gallery // 
 const reTurn = document.getElementById("return")
 reTurn.addEventListener("click", ()=>{
     modal.style.display="block"
@@ -126,6 +129,8 @@ closed.addEventListener('click', () => {
           modalAddwork.style.display="none"
       }
   });
+
+   // add work to gallery //
   async function addWorkToGallery(work) {
     
     if (work) {
@@ -451,7 +456,7 @@ const logout = () => {
     window.localStorage.removeItem("token"); 
     window.location.replace("Login/log.html"); 
   };
-  
+  // changes when user connected //
 const userConnectedPage = () => {
       const addBtn = () => {
       const projectsTitle = document.querySelector("#projects");
