@@ -151,7 +151,7 @@ closed.addEventListener('click', () => {
       const category = document.getElementById("PhotoCategory").value;
       const image = document.getElementById("btnAddPhoto").files[0];
   
-      // Check for empty fields
+   
       if (!title || !category || !image) {
           alert("Invalid! Please fill in all the fields");
           return;
@@ -187,6 +187,58 @@ closed.addEventListener('click', () => {
               document.getElementById("btnAddPhoto").value = "";
               document.getElementById("yourPhoto").src = "";
               alert("l'image a bien été ajoutée")
+              const submitForm = document.getElementById("addPhotoForm");
+  submitForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+  
+      const title = document.getElementById("PhotoTitle").value;
+      const category = document.getElementById("PhotoCategory").value;
+      const image = document.getElementById("btnAddPhoto").files[0];
+  
+   
+      if (!title || !category || !image) {
+          alert("Invalide, merci de remplir tous les champs");
+          return;
+      }
+  
+      const formData = new FormData(addPhotoForm);
+  
+      formData.append("image", image);
+      formData.append("title", title);
+      formData.append("category", category);
+  
+      if (image.size > 4 * 1024 * 1024) {
+          alert("L'image est trop grande");
+          return;
+      }
+  
+      try {
+          const response = await fetch("http://localhost:5678/api/works", {
+              method: "POST",
+              Accept: "application/json",
+              body: formData,
+              headers: {
+                  Authorization: `Bearer ${localStorage["token"]}`,
+              },
+          });
+  
+          if (response.ok) {
+              const newWork = await response.json();
+              addWorkToGallery(newWork); 
+              addWorkToModal(newWork); 
+              document.getElementById("PhotoTitle").value = "";
+              document.getElementById("PhotoCategory").value = "";
+              document.getElementById("btnAddPhoto").value = "";
+              document.getElementById("yourPhoto").src = "";
+              alert("l'image a bien été ajoutée")
+              submitForm = reset(); 
+              document.getElementById("btnChoosePhoto").value = "";
+             
+          }
+      } catch (error) {
+          console.error(error);
+      }
+  });
               
           }
       } catch (error) {
@@ -351,9 +403,12 @@ displayGallery()
 
   
       const buttons = document.querySelectorAll(".filters button");
-      buttons.forEach((button) => {
+      buttons.forEach((button, index) => { // Add index parameter to track the current button
         const buttonName = button.dataset.name;
-        button.addEventListener("click", function () {
+        if (index === 0) { // Check if the current button is the first button
+          button.classList.add("active"); // Add "active" class to the first button by default
+        }
+        button.addEventListener("click", function() {
           buttons.forEach((works) =>
             works.classList.remove("active"));
           button.classList.add("active")
@@ -369,6 +424,8 @@ displayGallery()
         });
       });
       
+    
+
       async function showAllWorks() {
         try {
           const allWorks = await document.querySelectorAll('figure');
