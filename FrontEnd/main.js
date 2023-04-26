@@ -3,14 +3,14 @@ const modify = document.createElement('span');
 const modal = document.querySelector(".modal")
 
 
-// function to show works //
+// get works from api//
 async function getworks(){
     const response = await fetch('http://localhost:5678/api/works')
     const infos = await response.json();
 
     return infos;
 }
-// function to create works //
+// create works //
 async function displayGallery(){
   const works = await getworks();
  
@@ -61,7 +61,7 @@ const showModalGallery = (works) => {
     addWorkToModal(work);
   });
   
-  // delete works in modal //
+ // delete works in gallery //
   const deleteWorks = document.querySelectorAll(".delete-work")
   deleteWorks.forEach((deleteWork) => {
     deleteWork.addEventListener("click", (e) => {
@@ -122,7 +122,7 @@ closed.addEventListener('click', () => {
   addWorks.style.display="none"
   });
 
-
+// display modal to add img//
   const modalAddwork = document.querySelector(".modal-addwork")
   modalAddwork.addEventListener("click", (event) => {
       if (event.target === document.querySelector(".modal-addwork")) {
@@ -147,112 +147,57 @@ closed.addEventListener('click', () => {
     }
   }
   
-
+// form modal addwork //
   const submitForm = document.getElementById("addPhotoForm");
-  submitForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-  
-      const title = document.getElementById("PhotoTitle").value;
-      const category = document.getElementById("PhotoCategory").value;
-      const image = document.getElementById("btnAddPhoto").files[0];
-  
-   
-      if (!title || !category || !image) {
-          alert("Invalid! Please fill in all the fields");
-          return;
-      }
-  
-      const formData = new FormData(addPhotoForm);
-  
-      formData.append("image", image);
-      formData.append("title", title);
-      formData.append("category", category);
-  
-      if (image.size > 4 * 1024 * 1024) {
-          alert("L'image est trop grande");
-          return;
-      }
-  
-      try {
-          const response = await fetch("http://localhost:5678/api/works", {
-              method: "POST",
-              Accept: "application/json",
-              body: formData,
-              headers: {
-                  Authorization: `Bearer ${localStorage["token"]}`,
-              },
-          });
-  
-          if (response.ok) {
-              const newWork = await response.json();
-              addWorkToGallery(newWork); 
-              addWorkToModal(newWork); 
-              document.getElementById("PhotoTitle").value = "";
-              document.getElementById("PhotoCategory").value = "";
-              document.getElementById("btnAddPhoto").value = "";
-              document.getElementById("yourPhoto").src = "";
-              alert("l'image a bien été ajoutée")
-              const submitForm = document.getElementById("addPhotoForm");
-  submitForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-  
-      const title = document.getElementById("PhotoTitle").value;
-      const category = document.getElementById("PhotoCategory").value;
-      const image = document.getElementById("btnAddPhoto").files[0];
-  
-   
-      if (!title || !category || !image) {
-          alert("Invalide, merci de remplir tous les champs");
-          return;
-      }
-  
-      const formData = new FormData(addPhotoForm);
-  
-      formData.append("image", image);
-      formData.append("title", title);
-      formData.append("category", category);
-  
-      if (image.size > 4 * 1024 * 1024) {
-          alert("L'image est trop grande");
-          return;
-      }
-  
-      try {
-          const response = await fetch("http://localhost:5678/api/works", {
-              method: "POST",
-              Accept: "application/json",
-              body: formData,
-              headers: {
-                  Authorization: `Bearer ${localStorage["token"]}`,
-              },
-          });
-  
-          if (response.ok) {
-              const newWork = await response.json();
-              addWorkToGallery(newWork); 
-              addWorkToModal(newWork); 
-              document.getElementById("PhotoTitle").value = "";
-              document.getElementById("PhotoCategory").value = "";
-              document.getElementById("btnAddPhoto").value = "";
-              document.getElementById("yourPhoto").src = "";
-              alert("l'image a bien été ajoutée")
-              submitForm = reset(); 
-              document.getElementById("btnChoosePhoto").value = "";
-             
-          }
-      } catch (error) {
-          console.error(error);
-      }
-  });
-              
-          }
-      } catch (error) {
-          console.error(error);
-      }
-  });
+
+submitForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const title = document.getElementById("PhotoTitle").value;
+  const category = document.getElementById("PhotoCategory").value;
+  const image = document.getElementById("btnAddPhoto").files[0];
+
+  if (!title || !category || !image) {
+    alert("Invalid! Please fill in all the fields");
+    return;
+  }
+
+  const formData = new FormData(submitForm);
+
+  formData.append("image", image);
+  formData.append("title", title);
+  formData.append("category", category);
+
+  try {
+    const response = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage["token"]}`,
+      },
+      body: formData,
+    });
+
+    if (response.ok) {
+      const newWork = await response.json();
+      addWorkToGallery(newWork);
+      addWorkToModal(newWork);
+      document.getElementById("PhotoTitle").value = "";
+      document.getElementById("PhotoCategory").value = "";
+      document.getElementById("btnAddPhoto").value = "";
+      document.getElementById("yourPhoto").src = "";
+      alert("l'image a bien été ajoutée");
+      submitForm.reset();
+      document.getElementById("btnAddPhoto").files = null;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
+
   
 
-
+// display work to modal window//
 const addWorkToModal = (work) => {
   const listWorks = document.querySelector(".list-works");
   
@@ -279,6 +224,7 @@ const addWorkToModal = (work) => {
   
   listWorks.appendChild(modalWork);
  
+  // delete work in modal //
   deleteBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const id = deleteBtn.dataset.id;
@@ -301,7 +247,7 @@ const addWorkToModal = (work) => {
 };
 
 
-
+// select img in preview area //
   const inputImage = document.getElementById("btnAddPhoto");
   const labelImage = document.getElementById("data-photos");
   const photoForm = document.getElementById("PhotoContainer");
@@ -330,14 +276,11 @@ const addWorkToModal = (work) => {
     })
       
   }
-      
-      
-  
   displaySelectedImage(inputImage, previewImage, labelImage, photoFormMessage, modalImageIcon);
   
 
 
-
+// change color btn if datas filled //
 function changeButtonColor() {
     const title = document.getElementById("PhotoTitle").value;
     const category = document.getElementById("PhotoCategory").value;
@@ -361,16 +304,13 @@ addImg.addEventListener("change", checkData);
 function checkData(event) {
   const image = event.target.files[0];
   if (image.size < 4 * 1024 * 1024) {
-   
-   
+
     
   } else {
     alert("La taille de l'image est trop grande");
   }
   
 }
-
-
 
 displayGallery()
   .catch(error => console.error(error));
@@ -389,7 +329,7 @@ displayGallery()
     }
   };
  
-  
+  // display works //
   async function displayCategories() {
     try {
       const response = await fetch("http://localhost:5678/api/categories");
@@ -406,12 +346,12 @@ displayGallery()
         createButton(category);
       });
 
-  
+  // create filter btn
       const buttons = document.querySelectorAll(".filters button");
-      buttons.forEach((button, index) => { // Add index parameter to track the current button
+      buttons.forEach((button, index) => { 
         const buttonName = button.dataset.name;
-        if (index === 0) { // Check if the current button is the first button
-          button.classList.add("active"); // Add "active" class to the first button by default
+        if (index === 0) { 
+          button.classList.add("active"); 
         }
         button.addEventListener("click", function() {
           buttons.forEach((works) =>
@@ -430,7 +370,7 @@ displayGallery()
       });
       
     
-
+      
       async function showAllWorks() {
         try {
           const allWorks = await document.querySelectorAll('figure');
@@ -456,7 +396,7 @@ const logout = () => {
     window.localStorage.removeItem("token"); 
     window.location.replace("Login/log.html"); 
   };
-  // changes when user connected //
+  //  modifies the display of elements when a user is logged in //
 const userConnectedPage = () => {
       const addBtn = () => {
       const projectsTitle = document.querySelector("#projects");
